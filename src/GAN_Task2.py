@@ -23,44 +23,32 @@ class VAE(nn.Module):
     def __init__(self, input_dim, latent_dim):
         super(VAE, self).__init__()
         # Encoder
-        self.encoder_fc1 = nn.Linear(input_dim, 64)
-        self.encoder_fc2 = nn.Linear(64, 32)
-        self.fc_mean = nn.Linear(32, latent_dim)
-        self.fc_log_var = nn.Linear(32, latent_dim)
+        ...
 
         # Decoder
-        self.decoder_fc1 = nn.Linear(latent_dim, 32)
-        self.decoder_fc2 = nn.Linear(32, 64)
-        self.decoder_fc3 = nn.Linear(64, input_dim)
+        ...
 
     def encode(self, x):
-        h = torch.relu(self.encoder_fc1(x))
-        h = torch.relu(self.encoder_fc2(h))
-        mean = self.fc_mean(h)
-        log_var = self.fc_log_var(h)
+        ...
         return mean, log_var
 
     def reparameterize(self, mean, log_var):
-        std = torch.exp(0.5 * log_var)
-        eps = torch.randn_like(std)
+        ...
         return mean + eps * std
 
     def decode(self, z):
-        h = torch.relu(self.decoder_fc1(z))
-        h = torch.relu(self.decoder_fc2(h))
+        ...
         return self.decoder_fc3(h)
 
     def forward(self, x):
-        mean, log_var = self.encode(x)
-        z = self.reparameterize(mean, log_var)
+        ...
         return self.decode(z), mean, log_var
 
 
 # Loss function (Reconstruction + KL Divergence)
 def vae_loss_function(recon_x, x, mean, log_var):
-    recon_loss = nn.MSELoss()(recon_x, x)
-    kl_loss = -0.5 * torch.sum(1 + log_var - mean.pow(2) - log_var.exp())
-    return recon_loss + kl_loss / x.size(0)
+    ...
+    return None
 
 
 # Hyperparameters
